@@ -1,0 +1,38 @@
+{
+  
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Accidents In India (2016)",
+  "width": 500,
+  "height": 400,
+  "projection": {"type": "equalEarth"},
+  "data": {
+    "url": "https://raw.githubusercontent.com/AhmadKhan1997/FIT3179-Homework9/main/india-states.json",
+    "format": {"type": "topojson", "feature": "IND_adm1"}
+  },
+  "transform": [
+    {
+      "lookup": "properties.NAME_1",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/AhmadKhan1997/FIT3179-Homework9/main/RA2019_A2.csv"
+        },
+        "key": "States/UTs",
+        "fields": ["cases2016"]
+      }
+    },
+    {"calculate": "datum.cases2016 + 0.1", "as": "Accidents"}
+  ],
+  "mark": {"type": "geoshape"},
+  "encoding": {
+    "color": {
+      "field": "Accidents",
+      "type": "quantitative",
+      "scale": {"type": "log"}
+    },
+    "tooltip": [
+      {"field": "properties.NAME_1", "type": "nominal", "title": "State"},
+      {"field": "cases2016", "type": "quantitative","title": "Accidents"}
+    ]
+  },
+  "config": {}
+}

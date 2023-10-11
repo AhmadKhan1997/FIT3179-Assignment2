@@ -1,0 +1,41 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Road Accidents In India (2016-2019)",
+  "width": 600,
+  "height": 400,
+  "projection": {"type": "equalEarth"},
+  "data": {
+    "url": "https://raw.githubusercontent.com/AhmadKhan1997/FIT3179/main/Homework%209/india-states.json",
+    "format": {"type": "topojson", "feature": "IND_adm1"}
+  },
+  "transform": [
+    {
+      "lookup": "properties.NAME_1",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/AhmadKhan1997/FIT3179-Assignment2/main/RA2019_A2.csv"
+        },
+        "key": "States/UTs",
+        "fields": ["Total"]
+      }
+    },
+    {"calculate": "datum.Total", "as": "Current Cases"}
+  ],
+  "mark": {
+    "type": "geoshape",
+    "stroke": "#757575",
+    "strokeWidth": 0.5
+  },
+  "encoding": {
+    "color": {
+      "field": "Current Cases",
+      "type": "quantitative",
+      "scale": {"scheme": "reds"}
+    },
+    "tooltip": [
+      {"field": "properties.NAME_1", "type": "nominal", "title": "State"},
+      {"field": "Total", "title":"Number Of Accidents", "type": "quantitative"}
+    ]
+  }
+} 
+

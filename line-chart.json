@@ -1,0 +1,27 @@
+{
+  "data": {
+    "url": "https://raw.githubusercontent.com/AhmadKhan1997/FIT3179/main/Homework%209/RA2019_A2.csv"
+  },
+  "repeat": {
+    "layer": [
+      "Total Number of  Road Accidents per 10,000 Vehicles - 2016",
+      "Total Number of  Road Accidents per 10,000 Vehicles - 2017",
+      "Total Number of  Road Accidents per 10,000 Vehicles - 2018",
+      "Total Number of  Road Accidents per 10,000 Vehicles - 2019"
+    ]
+  },
+  "spec": {
+    "mark": "line",
+    "encoding": {
+      "x": {"field": "States/UTs", "type": "nominal"},
+      "y": {
+        "aggregate": "mean",
+        "field": {"repeat": "layer"},
+        "type": "quantitative",
+        "title": "Value"
+      },
+      "color": {"datum": {"repeat": "layer"}, "type": "nominal"}
+    }
+  },
+  "config": {}
+}

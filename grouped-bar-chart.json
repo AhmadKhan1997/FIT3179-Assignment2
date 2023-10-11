@@ -1,0 +1,77 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "data": {
+    "url": "https://raw.githubusercontent.com/AhmadKhan1997/FIT3179-Assignment2/main/RA2019_A2.csv"
+  },
+  "encoding": {"x": {"field": "States/UTs", "type": "nominal"}},
+  "layer": [
+    {
+      "mark": {"type": "bar", "size": 5, "xOffset": -5, "color": "skyblue"},
+      "encoding": {
+        "y": {"field": "cases2016", "type": "quantitative"},
+        "tooltip": [
+          {"field": "States/UTs", "title": "State Name", "type": "nominal"},
+          {
+            "field": "cases2016",
+            "title": "Number of accidents",
+            "type": "quantitative"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {"type": "bar", "size": 5, "xOffset": 0, "color": "orange"},
+      "encoding": {
+        "y": {
+          "field": "State/UT-Wise Total Number of Road Accidents during 2017",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {"field": "States/UTs", "title": "State Name", "type": "nominal"},
+          {
+            "field": "State/UT-Wise Total Number of Road Accidents during 2017",
+            "title": "Number of accidents",
+            "type": "quantitative"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {"type": "bar", "size": 5, "xOffset": 5, "color": "green"},
+      "encoding": {
+        "y": {
+          "field": "State/UT-Wise Total Number of Road Accidents during 2018",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {"field": "States/UTs", "title": "State Name", "type": "nominal"},
+          {
+            "field": "State/UT-Wise Total Number of Road Accidents during 2018",
+            "title": "Number of accidents",
+            "type": "quantitative"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {"type": "bar", "size": 5, "xOffset": 10, "color": "red"},
+      "encoding": {
+        "y": {
+          "field": "State/UT-Wise Total Number of Road Accidents during 2019 - Numbers",
+          "type": "quantitative",
+          "axis": {"title": null, "ticks": false}
+        },
+        "tooltip": [
+          {"field": "States/UTs", "title": "State Name", "type": "nominal"},
+          {
+            "field": "State/UT-Wise Total Number of Road Accidents during 2019 - Numbers",
+            "title": "Number of accidents",
+            "type": "quantitative"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {}
+}
