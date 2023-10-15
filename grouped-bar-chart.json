@@ -4,7 +4,7 @@
   "data": {
     "url": "https://raw.githubusercontent.com/AhmadKhan1997/FIT3179-Assignment2/main/RA2019_A2.csv"
   },
-  "encoding": {"x": {"field": "States/UTs", "type": "nominal"}},
+  "encoding": {"x": {"field": "States/UTs","title":"State Name", "type": "nominal"}},
   "layer": [
     {
       "mark": {"type": "bar", "size": 5, "xOffset": -5, "color": "skyblue"},
@@ -25,7 +25,8 @@
       "encoding": {
         "y": {
           "field": "State/UT-Wise Total Number of Road Accidents during 2017",
-          "type": "quantitative"
+          "type": "quantitative",
+          "title":"Number of Accident"
         },
         "tooltip": [
           {"field": "States/UTs", "title": "State Name", "type": "nominal"},
@@ -59,8 +60,7 @@
       "encoding": {
         "y": {
           "field": "State/UT-Wise Total Number of Road Accidents during 2019 - Numbers",
-          "type": "quantitative",
-          "axis": {"title": null, "ticks": false}
+          "type": "quantitative"
         },
         "tooltip": [
           {"field": "States/UTs", "title": "State Name", "type": "nominal"},
