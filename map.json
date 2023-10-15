@@ -3,39 +3,99 @@
   "title": "Road Accidents In India (2016-2019)",
   "width": 600,
   "height": 400,
-  "projection": {"type": "equalEarth"},
-  "data": {
-    "url": "https://raw.githubusercontent.com/AhmadKhan1997/FIT3179/main/Homework%209/india-states.json",
-    "format": {"type": "topojson", "feature": "IND_adm1"}
-  },
-  "transform": [
+  "params": [
     {
-      "lookup": "properties.NAME_1",
-      "from": {
-        "data": {
-          "url": "https://raw.githubusercontent.com/AhmadKhan1997/FIT3179-Assignment2/main/RA2019_A2.csv"
-        },
-        "key": "States/UTs",
-        "fields": ["Total"]
+      "name": "zoom_level",
+      "value": 500,
+      "bind": {
+        "input": "range",
+        "min": 500,
+        "max": 1000,
+        "step": 10,
+        "name": "Zoom Level: "
       }
     },
-    {"calculate": "datum.Total", "as": "Current Cases"}
+    {
+      "name": "center_to",
+      "value": [82.5, 21.5],
+      "bind": {
+        "input": "select",
+        "options": [
+          [82.5, 21.5],
+          [75.3412, 33.2778],
+          [75.7139, 19.7515],
+          [78.6569, 11.1271],
+          [94.5624, 26.1584]
+        ],
+        "labels": [
+          "India",
+          "Jammu and Kashmir",
+          "Maharashtra",
+          "Tamil Nadu",
+          "NagaLand"
+        ],
+        "name": "Select State: "
+      }
+    }
   ],
-  "mark": {
-    "type": "geoshape",
-    "stroke": "#757575",
-    "strokeWidth": 0.5
+  "projection": {
+    "type": "equalEarth",
+    "center": {"expr": "center_to"},
+    "scale": {"expr": "zoom_level"}
   },
-  "encoding": {
-    "color": {
-      "field": "Current Cases",
-      "type": "quantitative",
-      "scale": {"scheme": "reds"}
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/AhmadKhan1997/FIT3179/main/Homework%209/india-states.json",
+        "format": {"type": "topojson", "feature": "IND_adm1"}
+      },
+      "mark": {"type": "geoshape", "stroke": "#757575", "strokeWidth": 0.5}
     },
-    "tooltip": [
-      {"field": "properties.NAME_1", "type": "nominal", "title": "State"},
-      {"field": "Total", "title":"Number Of Accidents", "type": "quantitative"}
-    ]
-  }
-} 
-
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/AhmadKhan1997/FIT3179/main/Homework%209/india-states.json",
+        "format": {"type": "topojson", "feature": "IND_adm1"}
+      },
+      "transform": [
+        {
+          "lookup": "properties.NAME_1",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/AhmadKhan1997/FIT3179-Assignment2/main/RA2019_A2.csv"
+            },
+            "key": "States/UTs",
+            "fields": ["Total"]
+          }
+        },
+        {
+          "calculate": "(datum.Total - 2000) / (260000 - 250)",
+          "as": "Road Accident"
+        },
+        {
+          "calculate": "datum.Total <= 0 ? 'Not Available' : datum.Total",
+          "as": "Total Accident"
+        }
+      ],
+      "mark": {"type": "geoshape"},
+      "encoding": {
+        "color": {
+          "field": "Road Accident",
+          "type": "quantitative",
+          "scale": {"scheme": "reds"}
+        },
+        "tooltip": [
+          {
+            "field": "properties.NAME_1",
+            "title": "State Name",
+            "type": "nominal"
+          },
+          {
+            "field": "Total Accident",
+            "title": "Number Of Accidents",
+            "type": "nominal"
+          }
+        ]
+      }
+    }
+  ]
+}
